@@ -18,7 +18,7 @@ const Footer = () => {
             </p>
 
             <div className="flex gap-4 text-lg text-white/80">
-              <a href="#" aria-label="Instagram"><FaInstagram /></a>
+              <a href="www.instagram.com/foobybaby/" aria-label="Instagram"><FaInstagram /></a>
               <a href="#" aria-label="Facebook"><FaFacebookF /></a>
             </div>
           </div>

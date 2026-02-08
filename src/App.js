@@ -12,7 +12,7 @@ import OpeningIntro from "./components/OpeningIntro";
 import ComingSoon from "./pages/ComingSoon";
 
 import Homepage from "./pages/HomePage";
-import Project from "./pages/ProjectsPage";
+import Product from "./pages/ProductsPage";
 import Aboutpage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
 import StudioPage from "./pages/StudioPage";
@@ -85,7 +85,7 @@ function App() {
               <Routes location={location}>
                 <Route path="/" element={<Homepage />} />
                 <Route path="/home" element={<Homepage />} />
-                <Route path="/projects" element={<Project />} />
+                <Route path="/products" element={<Product />} />
                 <Route path="/about" element={<Aboutpage />} />
                 <Route path="/contact" element={<ContactPage />} />
                 <Route path="/studio" element={<StudioPage />} />
@@ -93,23 +93,7 @@ function App() {
                 <Route path="/projects/architecture" element={<ArchPage />} />
                 <Route path="/projects/elements" element={<ElementsPage />} />
 
-                {/* Project Routes */}
-                <Route
-                  path="/projects/hillside-residence"
-                  element={<HillsideResidence />}
-                />
-                <Route path="/projects/cantilever-house" element={<ComingSoon />} />
-                <Route path="/projects/residence-nectar" element={<ComingSoon />} />
-                <Route path="/projects/residence-zeal" element={<ComingSoon />} />
-                <Route path="/projects/verde-suits" element={<ComingSoon />} />
-                <Route path="/projects/aafiya-hospital" element={<ComingSoon />} />
-                <Route path="/projects/mall-817" element={<ComingSoon />} />
-
-                {/* Blog Routes */}
-                <Route
-                  path="/blogs/light-in-architecture"
-                  element={<LightInArchitecture />}
-                />
+               
               </Routes>
             </motion.div>
           </AnimatePresence>

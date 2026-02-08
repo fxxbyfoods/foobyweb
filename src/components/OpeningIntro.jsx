@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -28,6 +29,10 @@ const OpeningIntro = ({ onFinish }) => {
           muted
           playsInline
           preload="auto"
+          controls={false}
+          disablePictureInPicture
+          controlsList="nodownload nofullscreen noplaybackrate"
+          onContextMenu={(e) => e.preventDefault()}
           initial={{ opacity: 0, scale: 3 }}
           animate={{ opacity: 1, scale: 3 }}
           transition={{ duration: 1.2, ease: "easeOut" }}
