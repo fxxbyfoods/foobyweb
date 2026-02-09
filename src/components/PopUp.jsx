@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
-const ACCENT = "#C4161C";
+const ACCENT = "#F47C20"; // Fooby warm orange
 
 export default function StartConversation() {
   const [open, setOpen] = useState(false);
@@ -17,31 +17,34 @@ export default function StartConversation() {
         className="
           hidden md:flex
           fixed bottom-6 right-6 z-[1000]
-          bg-black text-white px-5 py-2.5
-          rounded-full text-sm tracking-wide
-          hover:bg-gray-900 transition
+          bg-[#F47C20] text-white
+          px-5 py-2.5
+          rounded-full text-sm font-medium
+          hover:opacity-90 transition
+          shadow-lg
         "
       >
-        Start a Conversation
+        Talk to Fooby
       </motion.button>
 
-      {/* MOBILE CTA (ICON) */}
+      {/* MOBILE CTA */}
       <motion.button
-        initial={{ scale: 0.8, opacity: 0 }}
+        initial={{ scale: 0.85, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ duration: 0.3 }}
         onClick={() => setOpen(true)}
         className="
           md:hidden
           fixed bottom-6 right-6 z-[1000]
-          w-12 h-12 rounded-full
+          w-14 h-14 rounded-full
           flex items-center justify-center
           text-white text-xl
+          shadow-xl
         "
         style={{ backgroundColor: ACCENT }}
-        aria-label="Start conversation"
+        aria-label="Talk to Fooby"
       >
-        💬
+        🍼
       </motion.button>
 
       {/* Overlay + Panel */}
@@ -49,7 +52,7 @@ export default function StartConversation() {
         {open && (
           <>
             <motion.div
-              className="fixed inset-0 bg-black/40 z-[1000]"
+              className="fixed inset-0 bg-black/30 z-[1000]"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -59,57 +62,69 @@ export default function StartConversation() {
             <motion.div
               className="
                 fixed bottom-6 right-6 z-[1001]
-                w-[300px] max-w-[90vw]
-                bg-[#0f0f0f] text-white
-                border border-white/10
-                rounded-lg p-6
+                w-[320px] max-w-[92vw]
+                bg-white text-gray-800
+                border border-black/5
+                rounded-2xl p-6
+                shadow-2xl
               "
-              initial={{ y: 20, opacity: 0 }}
+              initial={{ y: 24, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              exit={{ y: 20, opacity: 0 }}
+              exit={{ y: 24, opacity: 0 }}
               transition={{ duration: 0.25 }}
               onClick={(e) => e.stopPropagation()}
             >
               {/* Header */}
               <div className="mb-4">
-                <h3 className="text-base font-semibold tracking-wide mb-2">
-                  Let’s Talk
+                <h3 className="text-base font-semibold mb-2">
+                  Let’s Talk About Your Baby 👶
                 </h3>
-
-                {/* Accent rule */}
                 <div
-                  className="h-px w-10"
+                  className="h-[2px] w-10 rounded"
                   style={{ backgroundColor: ACCENT }}
                 />
               </div>
 
-              <p className="text-sm text-white/70 mb-5 leading-relaxed">
-                We begin every project with a conversation.
-                Reach out and we’ll guide you through the next steps.
+              <p className="text-sm text-gray-600 mb-5 leading-relaxed">
+                Questions about ingredients, nutrition, or choosing the right
+                food for your little one? We’re here to help.
               </p>
 
               <div className="space-y-3 text-sm">
                 <a
-                  href="mailto:studiozjzb@gmail.com"
-                  className="block border border-white/20 rounded-md px-4 py-2 hover:border-white transition"
+                  href="mailto:hello@foobyfoods.com"
+                  className="
+                    block rounded-xl px-4 py-2.5
+                    border border-gray-200
+                    hover:border-gray-400 transition
+                  "
                 >
-                  Email the Studio
+                  Email Fooby Support
                 </a>
 
                 <a
                   href="https://wa.me/916006010530"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block border border-white/20 rounded-md px-4 py-2 hover:border-white transition"
+                  className="
+                    block rounded-xl px-4 py-2.5
+                    border border-gray-200
+                    hover:border-gray-400 transition
+                  "
                 >
-                  WhatsApp Inquiry
+                  WhatsApp Us
                 </a>
 
                 <button
                   disabled
-                  className="w-full text-left border border-white/10 rounded-md px-4 py-2 text-white/40 cursor-not-allowed"
+                  className="
+                    w-full text-left
+                    rounded-xl px-4 py-2.5
+                    border border-gray-100
+                    text-gray-400 cursor-not-allowed
+                  "
                 >
-                  Schedule a Call (Coming Soon)
+                  Nutrition Call (Coming Soon)
                 </button>
               </div>
             </motion.div>

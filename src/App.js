@@ -18,10 +18,9 @@ import ContactPage from "./pages/ContactPage";
 import StudioPage from "./pages/StudioPage";
 import ArchPage from "./pages/ArchPage";
 import BlogPage from "./pages/BlogPage";
-import ElementsPage from "./pages/ElementsPage";
+import WhyFooby from "./pages/WhyFooby";
+import CartPage from "./pages/CartPage";
 
-/* Project Pages */
-import HillsideResidence from "./pages/projects/HillsideResidence";
 
 /* Blog Pages */
 import LightInArchitecture from "./blogs/LightInArchitecture";
@@ -72,31 +71,32 @@ function App() {
             </motion.div>
           </AnimatePresence>
 
-          {/* Page Transitions */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={location.pathname}
-              variants={pageVariants}
-              initial="initial"
-              animate="animate"
-              exit="exit"
-              transition={{ duration: 0.5 }}
-            >
-              <Routes location={location}>
-                <Route path="/" element={<Homepage />} />
-                <Route path="/home" element={<Homepage />} />
-                <Route path="/products" element={<Product />} />
-                <Route path="/about" element={<Aboutpage />} />
-                <Route path="/contact" element={<ContactPage />} />
-                <Route path="/studio" element={<StudioPage />} />
-                <Route path="/blogs" element={<BlogPage />} />
-                <Route path="/projects/architecture" element={<ArchPage />} />
-                <Route path="/projects/elements" element={<ElementsPage />} />
-
-               
-              </Routes>
-            </motion.div>
-          </AnimatePresence>
+         {/* Page Transitions */}
+<AnimatePresence mode="wait">
+  <motion.main
+    key={location.pathname}
+    variants={pageVariants}
+    initial="initial"
+    animate="animate"
+    exit="exit"
+    transition={{ duration: 0.5 }}
+    className="pt-[69px]"
+  >
+    <Routes location={location}>
+      <Route path="/" element={<Homepage />} />
+      <Route path="/home" element={<Homepage />} />
+      <Route path="/products" element={<Product />} />
+      <Route path="/about" element={<Aboutpage />} />
+      <Route path="/contact" element={<ContactPage />} />
+      <Route path="/studio" element={<StudioPage />} />
+      <Route path="/blogs" element={<BlogPage />} />
+      <Route path="/projects/architecture" element={<ArchPage />} />
+      <Route path="/cart" element={<CartPage />} />
+        <Route path="/why-fooby" element={<WhyFooby />} />
+      
+    </Routes>
+  </motion.main>
+</AnimatePresence>
 
           {/* Global Popup */}
           <PopUp />
