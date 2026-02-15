@@ -113,22 +113,34 @@ export default function FoobyFeedbackForm() {
               </div>
             </div>
 
+            {/* CUSTOM PNG RATING */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Did your baby like it?
               </label>
-              <div className="flex gap-2">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <button
-                    type="button"
-                    key={star}
-                    onClick={() => updateField("liking", star)}
-                    className="text-3xl transition-transform hover:scale-110"
-                    style={{ color: form.liking >= star ? ACCENT : "#E5E7EB" }}
-                  >
-                    ★
-                  </button>
-                ))}
+
+              <div className="flex gap-3 items-center">
+                {[1, 2, 3, 4, 5].map((rating) => {
+                  const isActive = form.liking >= rating;
+                  const imgSrc = `${process.env.PUBLIC_URL}/images/rating/${
+                    isActive ? `${rating}.png` : `${rating}g.png`
+                  }`;
+
+                  return (
+                    <button
+                      type="button"
+                      key={rating}
+                      onClick={() => updateField("liking", rating)}
+                      className="transition-transform hover:scale-110"
+                    >
+                      <img
+                        src={imgSrc}
+                        alt={`${rating} rating`}
+                        className="w-10 h-10 object-contain"
+                      />
+                    </button>
+                  );
+                })}
               </div>
             </div>
           </div>
