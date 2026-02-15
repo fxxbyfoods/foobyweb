@@ -5,8 +5,11 @@ import { motion } from "framer-motion";
 
 const ACCENT = "#C4161C";
 
+const SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbyqHmDXL56Tq5z_LdOJX2sZQYOj9r2___9rGeL6nLH2xs4rF9eV83RUE9iwv_5tDltOgQ/exec";
+
 export default function FoobyFeedbackForm() {
-  const [form, setForm] = useState({
+  const initialState = {
     product: "",
     age: "",
     stage: "",
@@ -14,9 +17,10 @@ export default function FoobyFeedbackForm() {
     texture: "",
     rebuy: "",
     improvement: "",
-    wantsCoupon: "",
-    email: "",
-  });
+  };
+
+  const [form, setForm] = useState(initialState);
+  const [loading, setLoading] = useState(false);
 
   const products = [
     "Apple Puree",
@@ -35,9 +39,37 @@ export default function FoobyFeedbackForm() {
     setForm((prev) => ({ ...prev, [key]: value }));
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    alert("Thanks for helping us make better food 💛");
+
+    if (!form.product || !form.age || !form.stage || form.liking === 0) {
+      alert("Please complete all required fields.");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const formData = new FormData();
+      formData.append("data", JSON.stringify(form));
+
+      await fetch(SCRIPT_URL, {
+        method: "POST",
+        body: formData,
+        mode: "no-cors", // 🔥 critical fix
+      });
+
+      // If fetch didn't throw → treat as success
+      alert("Thanks for helping us make better food 💛");
+
+      setForm(initialState);
+
+    } catch (error) {
+      console.error("Network error:", error);
+      alert("Submission failed. Please try again.");
+    }
+
+    setLoading(false);
   }
 
   return (
@@ -113,7 +145,6 @@ export default function FoobyFeedbackForm() {
               </div>
             </div>
 
-            {/* CUSTOM PNG RATING */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Did your baby like it?
@@ -122,7 +153,7 @@ export default function FoobyFeedbackForm() {
               <div className="flex gap-3 items-center">
                 {[1, 2, 3, 4, 5].map((rating) => {
                   const isActive = form.liking >= rating;
-                  const imgSrc = `${process.env.PUBLIC_URL}/images/rating/${
+                  const imgSrc = `/images/rating/${
                     isActive ? `${rating}.png` : `${rating}g.png`
                   }`;
 
@@ -194,7 +225,6 @@ export default function FoobyFeedbackForm() {
             </div>
           </div>
 
-          {/* OPTIONAL */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Anything you’d like us to improve? (optional)
@@ -204,19 +234,18 @@ export default function FoobyFeedbackForm() {
               value={form.improvement}
               onChange={(e) => updateField("improvement", e.target.value)}
               className="w-full rounded-xl border border-gray-200 px-4 py-3 resize-none"
-              placeholder="Only if you want to…"
             />
           </div>
 
-          {/* SUBMIT */}
           <motion.button
             type="submit"
-            className="w-full rounded-full py-4 text-white font-medium text-base shadow-md"
+            disabled={loading}
+            className="w-full rounded-full py-4 text-white font-medium text-base shadow-md disabled:opacity-60"
             style={{ backgroundColor: ACCENT }}
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
           >
-            Submit feedback
+            {loading ? "Submitting..." : "Submit feedback"}
           </motion.button>
         </form>
       </div>
