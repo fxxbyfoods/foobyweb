@@ -26,8 +26,11 @@ const Navbar = () => {
           <NavLink to="/why-fooby" className="hover:text-slate-900">
             Why Fooby
           </NavLink>
-          <NavLink to="/faq" className="hover:text-slate-900">
+          <NavLink to="/fa-q" className="hover:text-slate-900">
             FAQ
+          </NavLink>
+          <NavLink to="/blogs" className="hover:text-slate-900">
+            Flogs
           </NavLink>
           <NavLink to="/contact" className="hover:text-slate-900">
             Contact

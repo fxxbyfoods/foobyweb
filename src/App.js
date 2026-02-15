@@ -9,7 +9,7 @@ import Navbar from "./components/Navbar";
 import PopUp from "./components/PopUp";
 import OpeningIntro from "./components/OpeningIntro";
 
-import ComingSoon from "./pages/ComingSoon";
+//import ComingSoon from "./pages/ComingSoon";
 
 import Homepage from "./pages/HomePage";
 import Product from "./pages/ProductsPage";
@@ -20,10 +20,9 @@ import ArchPage from "./pages/ArchPage";
 import BlogPage from "./pages/BlogPage";
 import WhyFooby from "./pages/WhyFooby";
 import CartPage from "./pages/CartPage";
+import FaqPage from "./pages/FaqPage";
 
 
-/* Blog Pages */
-import LightInArchitecture from "./blogs/LightInArchitecture";
 
 /* -------------------------
    Animation variants
@@ -93,7 +92,8 @@ function App() {
       <Route path="/projects/architecture" element={<ArchPage />} />
       <Route path="/cart" element={<CartPage />} />
         <Route path="/why-fooby" element={<WhyFooby />} />
-      
+      <Route path="/fa-q" element={<FaqPage />} />
+
     </Routes>
   </motion.main>
 </AnimatePresence>
