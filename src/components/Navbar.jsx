@@ -4,12 +4,22 @@ import { Link, NavLink } from "react-router-dom";
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
+  const closeMenu = () => setMenuOpen(false);
+
+  const navLinks = [
+    { name: "Products", path: "/products" },
+    { name: "Why Fooby", path: "/why-fooby" },
+    { name: "FAQ", path: "/fa-q" },
+    { name: "Flogs", path: "/blogs" },
+    { name: "Contact", path: "/contact" },
+  ];
+
   return (
     <header className="fixed top-0 left-0 w-full z-50 bg-white border-b border-black/5">
       <nav className="h-[72px] px-6 md:px-20 flex items-center justify-between">
 
         {/* LOGO */}
-        <Link to="/" className="flex items-center">
+        <Link to="/" className="flex items-center" onClick={closeMenu}>
           <img
             src={`${process.env.PUBLIC_URL}/images/fooby-logo.svg`}
             alt="Fooby"
@@ -20,25 +30,20 @@ const Navbar = () => {
 
         {/* DESKTOP NAV */}
         <div className="hidden md:flex items-center gap-10 text-sm font-medium text-slate-700">
-          <NavLink to="/products" className="hover:text-slate-900">
-            Products
-          </NavLink>
-          <NavLink to="/why-fooby" className="hover:text-slate-900">
-            Why Fooby
-          </NavLink>
-          <NavLink to="/fa-q" className="hover:text-slate-900">
-            FAQ
-          </NavLink>
-          <NavLink to="/blogs" className="hover:text-slate-900">
-            Flogs
-          </NavLink>
-          <NavLink to="/contact" className="hover:text-slate-900">
-            Contact
-          </NavLink>
+          {navLinks.map((link) => (
+            <NavLink
+              key={link.name}
+              to={link.path}
+              className="hover:text-slate-900 transition"
+            >
+              {link.name}
+            </NavLink>
+          ))}
         </div>
 
         {/* RIGHT ACTIONS */}
         <div className="flex items-center gap-3">
+
           {/* CART */}
           <Link
             to="/cart"
@@ -46,6 +51,7 @@ const Navbar = () => {
                        w-10 h-10 rounded-full
                        hover:bg-black/5 transition"
             aria-label="Cart"
+            onClick={closeMenu}
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -76,8 +82,8 @@ const Navbar = () => {
 
           {/* MOBILE MENU BUTTON */}
           <button
-            className="md:hidden w-10 h-10 flex items-center justify-center rounded-full hover:bg-black/5"
-            onClick={() => setMenuOpen((p) => !p)}
+            className="md:hidden w-10 h-10 flex items-center justify-center rounded-full hover:bg-black/5 transition"
+            onClick={() => setMenuOpen((prev) => !prev)}
             aria-label="Menu"
           >
             <svg
@@ -101,24 +107,23 @@ const Navbar = () => {
       {/* MOBILE MENU PANEL */}
       {menuOpen && (
         <div className="md:hidden bg-white border-t border-black/5 px-6 py-6">
-          <div className="flex flex-col gap-5 text-base font-medium text-slate-700">
-            <NavLink to="/products" onClick={() => setMenuOpen(false)}>
-              Products
-            </NavLink>
-            <NavLink to="/why-fooby" onClick={() => setMenuOpen(false)}>
-              Why Fooby
-            </NavLink>
-            <NavLink to="/faq" onClick={() => setMenuOpen(false)}>
-              FAQ
-            </NavLink>
-            <NavLink to="/contact" onClick={() => setMenuOpen(false)}>
-              Contact
-            </NavLink>
+          <div className="flex flex-col gap-6 text-base font-medium text-slate-700">
+
+            {navLinks.map((link) => (
+              <NavLink
+                key={link.name}
+                to={link.path}
+                onClick={closeMenu}
+                className="hover:text-slate-900 transition"
+              >
+                {link.name}
+              </NavLink>
+            ))}
 
             {/* MOBILE SHOP CTA */}
             <Link
               to="/shop"
-              onClick={() => setMenuOpen(false)}
+              onClick={closeMenu}
               className="mt-4 inline-flex justify-center rounded-full
                          bg-pink-300 px-6 py-3
                          text-sm font-semibold text-slate-800
